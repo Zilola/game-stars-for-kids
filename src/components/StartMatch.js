@@ -5,6 +5,12 @@ import { StarsDisplay } from './StarsDisplay';
 
 export const StartMatch = () => {
     const [stars, setStars] = useState(utils.random(1, 9));
+    const [availableNums, setAvailableNums] = useState([1, 2, 3, 4, 5]);
+    const [candidateNums, setCandidateums] = useState([2, 3]);
+    const [canditatesAreWrong, setcanditatesAreWrong] = useState(utils.sum(candidateNums) > stars);
+
+
+
     return (
      
         <div className="game">
@@ -19,7 +25,14 @@ export const StartMatch = () => {
                 </div>
                 <div className="right">
                     {utils.range(1, 9).map(number =>
-                        <PlayNumber key={number} number={number} />
+                        <PlayNumber
+                            key={number}
+                            number={number}
+                            availableNum={availableNums}
+                            candidateNum={candidateNums}
+                            candidateAreNotCorrect={canditatesAreWrong}
+
+                        />
 
                     )}
                 </div>
@@ -31,8 +44,8 @@ export const StartMatch = () => {
 
 
 // Color Theme
-const colors = {
-    available: 'lightgray',
+export const colors = {
+    // available: 'lightgray',
     used: 'lightgreen',
     wrong: 'lightcoral',
     candidate: 'deepskyblue',
